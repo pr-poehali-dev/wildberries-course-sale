@@ -1,22 +1,23 @@
-
-import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import Icon from '@/components/ui/icon';
-import { toast } from '@/hooks/use-toast';
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import Icon from "@/components/ui/icon";
+import { toast } from "@/hooks/use-toast";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 const OrderForm: React.FC = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("card");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     // Имитация отправки формы
     setTimeout(() => {
       toast({
@@ -24,9 +25,9 @@ const OrderForm: React.FC = () => {
         description: "Мы свяжемся с вами в ближайшее время",
       });
       setIsSubmitting(false);
-      setName('');
-      setEmail('');
-      setPhone('');
+      setName("");
+      setEmail("");
+      setPhone("");
     }, 1500);
   };
 
@@ -36,13 +37,16 @@ const OrderForm: React.FC = () => {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <h2 className="text-3xl md:text-4xl font-bold">
-              Начните зарабатывать на <span className="text-gradient">Wildberries</span> уже сегодня
+              Начните зарабатывать на{" "}
+              <span className="text-gradient">Wildberries</span> уже сегодня
             </h2>
-            
+
             <p className="text-lg text-muted-foreground">
-              Запишитесь на курс сейчас и получите доступ к эксклюзивным материалам, которые помогут вам быстро начать зарабатывать на картах товаров
+              Запишитесь на курс сейчас и получите доступ к эксклюзивным
+              материалам, которые помогут вам быстро начать зарабатывать на
+              картах товаров
             </p>
-            
+
             <div className="pt-4 space-y-4">
               <div className="flex items-start">
                 <div className="h-10 w-10 rounded-full bg-wb-purple/10 flex items-center justify-center mr-4 shrink-0">
@@ -50,122 +54,241 @@ const OrderForm: React.FC = () => {
                 </div>
                 <div>
                   <h3 className="font-bold text-lg">20+ видеоуроков</h3>
-                  <p className="text-muted-foreground">Подробные пошаговые инструкции по работе с картами</p>
+                  <p className="text-muted-foreground">
+                    Подробные пошаговые инструкции по работе с картами
+                  </p>
                 </div>
               </div>
-              
+
               <div className="flex items-start">
                 <div className="h-10 w-10 rounded-full bg-wb-purple/10 flex items-center justify-center mr-4 shrink-0">
                   <Icon name="FileText" className="h-5 w-5 text-wb-purple" />
                 </div>
                 <div>
                   <h3 className="font-bold text-lg">Готовые шаблоны</h3>
-                  <p className="text-muted-foreground">Шаблоны для быстрого создания эффективных карточек</p>
+                  <p className="text-muted-foreground">
+                    Шаблоны для быстрого создания эффективных карточек
+                  </p>
                 </div>
               </div>
-              
+
               <div className="flex items-start">
                 <div className="h-10 w-10 rounded-full bg-wb-purple/10 flex items-center justify-center mr-4 shrink-0">
-                  <Icon name="MessagesSquare" className="h-5 w-5 text-wb-purple" />
+                  <Icon
+                    name="MessagesSquare"
+                    className="h-5 w-5 text-wb-purple"
+                  />
                 </div>
                 <div>
                   <h3 className="font-bold text-lg">Поддержка наставника</h3>
-                  <p className="text-muted-foreground">Личные консультации и ответы на все вопросы</p>
+                  <p className="text-muted-foreground">
+                    Личные консультации и ответы на все вопросы
+                  </p>
                 </div>
               </div>
-              
+
               <div className="flex items-start">
                 <div className="h-10 w-10 rounded-full bg-wb-purple/10 flex items-center justify-center mr-4 shrink-0">
                   <Icon name="Users" className="h-5 w-5 text-wb-purple" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-lg">Сообщество единомышленников</h3>
-                  <p className="text-muted-foreground">Закрытый чат для общения с другими учениками</p>
+                  <h3 className="font-bold text-lg">
+                    Сообщество единомышленников
+                  </h3>
+                  <p className="text-muted-foreground">
+                    Закрытый чат для общения с другими учениками
+                  </p>
                 </div>
               </div>
             </div>
           </div>
-          
+
           <div>
             <Card className="border-2 border-wb-purple/20 overflow-hidden">
               <div className="bg-gradient-to-r from-wb-purple to-wb-pink p-6 text-white">
-                <h3 className="text-2xl font-bold mb-2">Онлайн-курс "Заработок на картах Wildberries"</h3>
-                <p>Запишитесь сейчас и начните зарабатывать уже через 3 недели</p>
+                <h3 className="text-2xl font-bold mb-2">
+                  Онлайн-курс "Заработок на картах Wildberries"
+                </h3>
+                <p>
+                  Запишитесь сейчас и начните зарабатывать уже через 3 недели
+                </p>
               </div>
-              
+
               <CardContent className="p-6">
                 <div className="flex justify-between items-center mb-6">
                   <div className="flex items-baseline">
                     <span className="text-3xl font-bold">15 990 ₽</span>
-                    <span className="text-muted-foreground line-through ml-2">25 990 ₽</span>
+                    <span className="text-muted-foreground line-through ml-2">
+                      25 990 ₽
+                    </span>
                   </div>
                   <div className="bg-wb-orange text-white text-sm font-bold px-3 py-1 rounded-full">
                     Скидка 38%
                   </div>
                 </div>
-                
+
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="space-y-2">
                     <Label htmlFor="name">Ваше имя</Label>
-                    <Input 
-                      id="name" 
-                      placeholder="Введите ваше имя" 
+                    <Input
+                      id="name"
+                      placeholder="Введите ваше имя"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       required
                     />
                   </div>
-                  
+
                   <div className="space-y-2">
                     <Label htmlFor="email">Email</Label>
-                    <Input 
-                      id="email" 
-                      type="email" 
-                      placeholder="Введите ваш email" 
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="Введите ваш email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
                     />
                   </div>
-                  
+
                   <div className="space-y-2">
                     <Label htmlFor="phone">Телефон</Label>
-                    <Input 
-                      id="phone" 
-                      placeholder="+7 (999) 123-45-67" 
+                    <Input
+                      id="phone"
+                      placeholder="+7 (999) 123-45-67"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       required
                     />
                   </div>
-                  
-                  <Button 
-                    type="submit" 
+
+                  {/* Добавляем выбор способа оплаты */}
+                  <div className="space-y-2">
+                    <Label>Способ оплаты</Label>
+                    <RadioGroup
+                      value={paymentMethod}
+                      onValueChange={setPaymentMethod}
+                      className="flex flex-col space-y-2"
+                    >
+                      <div className="flex items-center space-x-2 border rounded-md p-3 cursor-pointer hover:bg-muted transition-colors">
+                        <RadioGroupItem value="card" id="payment-card" />
+                        <Label
+                          htmlFor="payment-card"
+                          className="cursor-pointer flex items-center"
+                        >
+                          <Icon
+                            name="CreditCard"
+                            className="mr-2 h-5 w-5 text-wb-purple"
+                          />
+                          Банковская карта онлайн
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-2 border rounded-md p-3 cursor-pointer hover:bg-muted transition-colors">
+                        <RadioGroupItem value="sbp" id="payment-sbp" />
+                        <Label
+                          htmlFor="payment-sbp"
+                          className="cursor-pointer flex items-center"
+                        >
+                          <Icon
+                            name="Banknote"
+                            className="mr-2 h-5 w-5 text-wb-purple"
+                          />
+                          Система быстрых платежей (СБП)
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-2 border rounded-md p-3 cursor-pointer hover:bg-muted transition-colors">
+                        <RadioGroupItem value="invoice" id="payment-invoice" />
+                        <Label
+                          htmlFor="payment-invoice"
+                          className="cursor-pointer flex items-center"
+                        >
+                          <Icon
+                            name="FileText"
+                            className="mr-2 h-5 w-5 text-wb-purple"
+                          />
+                          Счет на оплату (юр. лица)
+                        </Label>
+                      </div>
+                    </RadioGroup>
+                  </div>
+
+                  {/* Информация о безопасности платежей */}
+                  <div className="p-3 bg-wb-purple/5 rounded-md border border-wb-purple/20 flex items-start mt-4">
+                    <Icon
+                      name="Shield"
+                      className="h-5 w-5 text-wb-purple mr-2 mt-0.5 shrink-0"
+                    />
+                    <p className="text-sm text-muted-foreground">
+                      Все платежи обрабатываются через защищенное соединение.
+                      Ваши данные защищены по протоколу SSL.
+                    </p>
+                  </div>
+
+                  <Button
+                    type="submit"
                     className="w-full bg-wb-purple hover:bg-wb-pink text-white font-medium text-lg py-6"
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? (
                       <>
-                        <Icon name="Loader2" className="mr-2 h-5 w-5 animate-spin" />
+                        <Icon
+                          name="Loader2"
+                          className="mr-2 h-5 w-5 animate-spin"
+                        />
                         Отправка...
                       </>
                     ) : (
                       <>
-                        Оплатить курс
+                        {paymentMethod === "card" && "Оплатить картой"}
+                        {paymentMethod === "sbp" && "Оплатить через СБП"}
+                        {paymentMethod === "invoice" && "Получить счет"}
                         <Icon name="ArrowRight" className="ml-2 h-5 w-5" />
                       </>
                     )}
                   </Button>
                 </form>
-                
+
                 <div className="mt-6 text-center text-sm text-muted-foreground">
-                  <p>Нажимая кнопку, вы соглашаетесь с условиями оферты и политикой конфиденциальности</p>
+                  <p>
+                    Нажимая кнопку, вы соглашаетесь с условиями оферты и
+                    политикой конфиденциальности
+                  </p>
                 </div>
-                
-                <div className="mt-6 flex justify-center space-x-4">
-                  <Icon name="CreditCard" className="h-8 w-8 text-muted-foreground" />
-                  <Icon name="CircleDollarSign" className="h-8 w-8 text-muted-foreground" />
-                  <Icon name="Wallet" className="h-8 w-8 text-muted-foreground" />
+
+                <div className="mt-6">
+                  <h4 className="font-medium mb-2 text-center">
+                    Принимаем к оплате
+                  </h4>
+                  <div className="flex justify-center space-x-4">
+                    <div className="bg-white p-1 rounded shadow-sm">
+                      <img
+                        src="https://www.svgrepo.com/show/14823/visa.svg"
+                        alt="Visa"
+                        className="h-8"
+                      />
+                    </div>
+                    <div className="bg-white p-1 rounded shadow-sm">
+                      <img
+                        src="https://www.svgrepo.com/show/14818/mastercard.svg"
+                        alt="MasterCard"
+                        className="h-8"
+                      />
+                    </div>
+                    <div className="bg-white p-1 rounded shadow-sm">
+                      <img
+                        src="https://www.svgrepo.com/show/191819/mir.svg"
+                        alt="МИР"
+                        className="h-8"
+                      />
+                    </div>
+                    <div className="bg-white p-1 rounded shadow-sm">
+                      <img
+                        src="https://www.svgrepo.com/show/374063/sbp.svg"
+                        alt="СБП"
+                        className="h-8"
+                      />
+                    </div>
+                  </div>
                 </div>
               </CardContent>
             </Card>
